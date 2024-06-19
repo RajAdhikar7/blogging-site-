@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - My Blog{% endblock %}
+
+{% block content %}
+<section class="intro">
+    <h2>Welcome to My Blog</h2>
+    <p>This is a place where authors share their thoughts and experiences on various topics. Enjoy your stay!</p>
+</section>
+<section class="posts">
+    {% for post in posts %}
+    <article>
+        <h3>{{ post.title }}</h3>
+        <p>by {{ post.author.username }} on {{ post.publish_date }}</p>
+        <p>
+            Category: 
+            {% if post.category %}
+                {{ post.category.name }}
+            {% else %}
+                No Category
+            {% endif %}
+        </p>
+        <div class="tags">
+            Tags: 
+            {% for tag in post.tags.all %}
+                <span>{{ tag.name }}</span>
+            {% endfor %}
+        </div>
+        <p>{{ post.content|truncatewords:30 }}</p>
+        <a href="{% url 'post_detail' post.id %}" class="read-more">Read More</a>
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}
