@@ -4,7 +4,7 @@
 
 {% block content %}
 <section class="intro">
-    <h2>Welcome to My Blog</h2>
+    <h2>Welcome To Blog-site</h2>
     <p>This is a place where authors share their thoughts and experiences on various topics. Enjoy your stay!</p>
 </section>
 <section class="posts">
@@ -27,8 +27,9 @@
             {% endfor %}
         </div>
         <p>{{ post.content|truncatewords:30 }}</p>
-        <a href="{% url 'post_detail' post.id %}" class="read-more">Read More</a>
+        <a href="{% url 'detail' post.id %}" class="read-more">Read More</a>
     </article>
+    
     {% endfor %}
 </section>
 {% endblock %}

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}My Blog{% endblock %}</title>
+    <title>{% block title %}Blog-site{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'blogsite/static/css/style.css' %}">
     <style>
         body {
@@ -28,6 +28,9 @@
             padding: 20px 0;
             text-align: center;
             border-bottom: 5px solid #388E3C;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
         header h1 {
@@ -61,6 +64,32 @@
             background: #2E7D32;
         }
         
+        .search-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .search-container input[type="text"] {
+            padding: 7px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        
+        .search-container button {
+            padding: 7px 15px;
+            border: none;
+            border-radius: 5px;
+            background: #388E3C;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .search-container button:hover {
+            background: #2E7D32;
+        }
+        
         main {
             padding: 20px 0;
             background: #fff;
@@ -83,7 +112,7 @@
 <body>
     <header>
         <div class="container">
-            <h1>My Blog</h1>
+            <h1>Blog-site</h1>
             <nav>
                 <ul>
                     <li><a href="{% url 'home' %}">Home</a></li>
@@ -96,6 +125,12 @@
                     {% endif %}
                 </ul>
             </nav>
+            <div class="search-container">
+                <form action="{% url 'search' %}" method="get">
+                    <input type="text" placeholder="Search..." name="q">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
         </div>
     </header>
     <main>
@@ -105,7 +140,7 @@
     </main>
     <footer>
         <div class="container">
-            <p>&copy; 2024 My Blog. All rights reserved.</p>
+            <p>&copy; 2024 Blog-site. All rights reserved.</p>
         </div>
     </footer>
 </body>

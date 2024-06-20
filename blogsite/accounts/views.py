@@ -20,7 +20,7 @@ def login_view(request):
 
             if user is not None:
                 login(request, user)
-                return redirect('home/') 
+                return redirect('home') 
             else:
                 login_form.add_error('Authentication failed. Please try again.')
     else:

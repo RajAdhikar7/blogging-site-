@@ -7,7 +7,7 @@ class PostForm(forms.ModelForm):
         fields = ['title', 'content', 'category', 'tags']  # Exclude 'author' and 'publish_date' as they are set automatically
 
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user', None)  # Get the current user from the kwargs
+        self.user = kwargs.pop('user', None)  # Get the current user from the kwargs
         super().__init__(*args, **kwargs)
 
         # Limit categories and tags choices 
@@ -15,7 +15,7 @@ class PostForm(forms.ModelForm):
         self.fields['tags'].queryset = Tag.objects.all()
 
         self.fields['title'].widget.attrs.update({'class': 'form-control'})
-        self.fields['content'].widget.attrs.update({'class': 'form-control', 'rows': 10})
+        self.fields['content'].widget.attrs.update({'class': 'form-control', 'rows': 20})
         self.fields['category'].widget.attrs.update({'class': 'form-control'})
         self.fields['tags'].widget.attrs.update({'class': 'form-control', 'multiple': 'multiple'})
 
