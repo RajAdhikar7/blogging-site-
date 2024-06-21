@@ -37,7 +37,7 @@ Install dependencies:
 
 sh
 
-pip install django 
+pip install -r requirements.txt
 
 Apply migrations:
 
