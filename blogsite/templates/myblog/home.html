@@ -27,7 +27,12 @@
             {% endfor %}
         </div>
         <p>{{ post.content|truncatewords:30 }}</p>
-        <a href="{% url 'detail' post.id %}" class="read-more">Read More</a>
+        <span>
+            <a href="{% url 'detail' post.id %}" class="read-more" style="margin-right: 10px;">Read More</a>
+            <a href="{% url 'update' post.id %}" class="update">Update This Post</a>
+        </span>
+        
+        
     </article>
     
     {% endfor %}

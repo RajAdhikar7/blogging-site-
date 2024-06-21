@@ -130,6 +130,8 @@
                                     <button type="submit">Search</button>
                                 </form>
                             </li>
+                        {% else %}
+                            <li><a href="{% url 'post' %}">Post</a></li>
                         {% endif %}
                     </ul>
                 </nav>

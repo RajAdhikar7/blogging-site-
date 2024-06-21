@@ -23,7 +23,22 @@ def create_view(request):
     else:
         form = PostForm(user = request.user)
     
-    return render(request , 'myblog/create_post.html', {'create_form':form})
+    return render(request , 'myblog/create_post.html', {'form':form})
+
+@login_required
+def update_view(request , id=None):
+    obj = get_object_or_404(Post, id=id)
+    if request.method=='POST':
+        form = PostForm(request.POST or None , user = request.user , instance = obj)
+        if form.is_valid():
+            post = form.save()
+            return redirect('detail',id=post.pk)
+    else:
+        form = PostForm(instance = obj  , user = request.user)
+    
+    return render(request , 'myblog/create_post.html', {"form":form})
+
+    
 
 @login_required 
 def detail_view(request, id):

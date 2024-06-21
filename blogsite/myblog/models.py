@@ -30,6 +30,9 @@ class Post(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)  # Optional category
     tags = models.ManyToManyField(Tag)
 
+    def __str__(self):
+        return self.title
+
 class Comment(models.Model):
     content = models.TextField()
     author = models.ForeignKey(User, on_delete=models.CASCADE, limit_choices_to={'user_type': 'reader'})  # Restrict to readers
