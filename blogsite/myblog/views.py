@@ -38,3 +38,15 @@ def add_comment(request ,post_id):
         if content:
             Comment.objects.create(content=content, author=request.user , post=post)
     return redirect('detail', id = post.id)
+
+@login_required
+def search_view(request):
+    query = request.GET.get('q')
+    result= Post.objects.filter(title__icontains=query).first()
+    if result:
+        return redirect('detail', id = result.id)
+    
+    context ={
+        "message": "Opps! No results found"
+    }
+    return render(request ,'base.html', context)

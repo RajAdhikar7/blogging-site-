@@ -26,8 +26,10 @@
             background: #4CAF50;
             color: #fff;
             padding: 20px 0;
-            text-align: center;
             border-bottom: 5px solid #388E3C;
+        }
+        
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -39,24 +41,21 @@
         }
         
         nav ul {
+            display: flex;
             padding: 0;
             list-style: none;
-            text-align: center;
-            background: #388E3C;
             margin: 0;
-            overflow: hidden;
+            align-items: center;
         }
         
         nav ul li {
-            display: inline;
-            margin: 0;
+            margin: 0 10px;
         }
         
         nav ul li a {
             color: #fff;
             text-decoration: none;
             padding: 15px 20px;
-            display: inline-block;
             transition: background 0.3s;
         }
         
@@ -112,28 +111,36 @@
 <body>
     <header>
         <div class="container">
-            <h1>Blog-site</h1>
-            <nav>
-                <ul>
-                    <li><a href="{% url 'home' %}">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                    {% if user.is_authenticated %}
-                        <li><a href="{% url 'logout' %}">Logout</a></li>
-                    {% else %}
-                        <li><a href="{% url 'login' %}">Login</a></li>
-                    {% endif %}
-                </ul>
-            </nav>
-            <div class="search-container">
-                <form action="{% url 'search' %}" method="get">
-                    <input type="text" placeholder="Search..." name="q">
-                    <button type="submit">Search</button>
-                </form>
+            <div class="header-content">
+                <h1>Blog-site</h1>
+                <nav>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        {% if user.is_authenticated %}
+                            <li><a href="{% url 'logout' %}">Logout</a></li>
+                        {% else %}
+                            <li><a href="{% url 'login' %}">Login</a></li>
+                        {% endif %}
+                        {% if user.is_authenticated and user.user_type == 'reader' %}
+                            <li class="search-container">
+                                <form action="{% url 'search' %}" method="get">
+                                    <input type="text" placeholder="Search..." name="q">
+                                    <button type="submit">Search</button>
+                                </form>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
             </div>
         </div>
     </header>
+    
     <main>
+        {% if message %}
+            <p style="text-align: center;">{{message}}</p>
+        {%endif%}
         <div class="container">
             {% block content %}{% endblock %}
         </div>
