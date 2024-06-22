@@ -14,8 +14,7 @@ Table of Contents
     Installation
     Usage
     Contributing
-    License
-    Contact
+  
 
 Installation
 
